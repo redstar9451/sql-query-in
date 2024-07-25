@@ -1,5 +1,8 @@
+### Go template
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+#
 # Binaries for programs and plugins
-add_quotes
 *.exe
 *.exe~
 *.dll
@@ -14,3 +17,11 @@ add_quotes
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Go workspace file
+go.work
+
+# app binary
+add_quotes
+
+.idea/

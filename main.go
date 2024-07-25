@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func sqlQueryAddQuotes() string {
+func sqlQueryAddQuotes(valueType int) string {
 	keywords := readKeywords()
 
 	if len(keywords) == 0 {
@@ -23,6 +23,9 @@ func sqlQueryAddQuotes() string {
 	res := "in ("
 	res += strings.Join(keyList, ", ")
 	res += ")"
+	if valueType == valueTypeOther {
+		res = strings.ReplaceAll(res, "\"", "")
+	}
 	return res
 }
 
@@ -42,7 +45,18 @@ func readKeywords() map[string]int {
 	return keywords
 }
 
+const valueTypeString = 0
+const valueTypeOther = 1
+
 func main() {
-	res := sqlQueryAddQuotes()
+	arg := "string"
+	if len(os.Args) == 2 {
+		arg = os.Args[1]
+	}
+	valueType := valueTypeString
+	if arg != "string" {
+		valueType = valueTypeOther
+	}
+	res := sqlQueryAddQuotes(valueType)
 	fmt.Println(res)
 }
